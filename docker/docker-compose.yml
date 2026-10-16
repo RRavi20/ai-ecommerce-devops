@@ -1,0 +1,10 @@
+services:
+  ecommerce:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: ai-ecommerce-devops:1.0
+    container_name: ai-ecommerce-app
+    ports:
+      - "8082:80"
+    restart: unless-stopped

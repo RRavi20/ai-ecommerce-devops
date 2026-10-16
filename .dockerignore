@@ -1,0 +1,13 @@
+.git
+.gitignore
+README.md
+docs/
+terraform/
+ansible/
+monitoring/
+logging/
+security/
+ai/
+kubernetes/
+helm/
+scripts/
