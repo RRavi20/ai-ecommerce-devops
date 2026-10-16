@@ -1,6 +1,7 @@
 FROM nginx:alpine
 
 LABEL project="AI-Powered-E-Commerce-DevOps"
+RUN apk upgrade --no-cache
 
 COPY application/index.html /usr/share/nginx/html/index.html
 

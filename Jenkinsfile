@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         IMAGE_NAME = 'ai-ecommerce-devops'
-        IMAGE_TAG = '1.0'
+        IMAGE_TAG = '1.1'
         CONTAINER_NAME = 'ai-ecommerce-jenkins'
         APP_PORT = '8083'
     }
