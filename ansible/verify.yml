@@ -1,0 +1,39 @@
+---
+- name: Verify AI E-Commerce DevOps application
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  tasks:
+    - name: Check Jenkins-deployed application
+      ansible.builtin.uri:
+        url: http://127.0.0.1:8083/
+        method: GET
+        status_code: 200
+      register: app_health
+
+    - name: Display application health
+      ansible.builtin.debug:
+        msg: "E-Commerce application is responding with HTTP {{ app_health.status }}"
+
+    - name: Check Docker container status
+      ansible.builtin.command:
+        argv:
+          - docker
+          - inspect
+          - --format
+          - "{{ '{{' }}.State.Status{{ '}}' }}"
+          - ai-ecommerce-jenkins
+      register: container_status
+      changed_when: false
+
+    - name: Display container status
+      ansible.builtin.debug:
+        msg: "Docker container status: {{ container_status.stdout }}"
+
+    - name: Ensure container is running
+      ansible.builtin.assert:
+        that:
+          - container_status.stdout == "running"
+        fail_msg: "E-Commerce Docker container is not running."
+        success_msg: "E-Commerce Docker container is running."
